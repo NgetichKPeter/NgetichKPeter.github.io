@@ -1,26 +1,122 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Admin — NgetichTech</title><link rel="stylesheet" href="style.css">
-<style>.admin-wrap{max-width:860px;margin:0 auto;padding:32px 20px}.admin-card{background:#fff;border:1px solid #E8E5DF;border-radius:16px;padding:24px;margin-bottom:20px}.admin-card input,.admin-card select,.admin-card textarea{width:100%;padding:12px;border:1px solid #DDD;border-radius:10px;margin:8px 0;font-family:inherit}.admin-card textarea{min-height:120px}.post-row{display:flex;justify-content:space-between;gap:12px;padding:14px;border-bottom:1px solid #EEE;align-items:center}.btn-danger{background:#DC2626;color:#fff;border:0;padding:8px 14px;border-radius:999px;cursor:pointer}.btn-edit{background:#fff;border:1px solid #DDD;padding:8px 14px;border-radius:999px;cursor:pointer}</style>
-</head><body>
-<header class="topbar"><div class="wrap topbar-inner"><a href="index.html" class="logo"><span class="logo-mark">N</span> Ngetich<span>Tech</span></a><a href="index.html">← Back to site</a></div></header>
-<main class="admin-wrap">
-<div id="loginBox" class="admin-card"><h2 style="font-family:Fraunces,serif">Admin Login</h2><p style="color:#666">Only you can log in here.</p><input id="email" type="email" placeholder="Admin email"><input id="password" type="password" placeholder="Password"><button class="btn-primary" id="loginBtn">Log in</button><p id="loginError" style="color:red"></p></div>
-<div id="dash" style="display:none">
-  <div style="display:flex;justify-content:space-between;align-items:center"><h2 style="font-family:Fraunces,serif">Dashboard</h2><button class="btn-ghost" id="logoutBtn">Log out</button></div>
-  <div class="admin-card"><h3 id="formTitle">New Post</h3>
-    <input id="title" placeholder="Title — e.g. How I built a booking tool">
-    <select id="category"><option>Code</option><option>Photography</option><option>Video</option><option>Writing</option></select>
-    <select id="type"><option value="text">Text</option><option value="photo">Photo</option><option value="video">Video</option><option value="code">Code</option></select>
-    <input id="excerpt" placeholder="Short description (1-2 lines)">
-    <input id="mediaUrl" placeholder="Image URL or YouTube URL (optional)">
-    <textarea id="content" placeholder="Full content, story, or code..."></textarea>
-    <button class="btn-primary" id="saveBtn">Publish Post</button>
-    <button class="btn-ghost" id="clearBtn">Clear form</button>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Ngetich K Peter</title>
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  .admin-wrap{max-width:880px;margin:0 auto;padding:28px 20px 60px}
+  .admin-top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+  .admin-profile{display:flex;align-items:center;gap:14px}
+  .admin-avatar{width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid #EDEDEA;background:#F3F2EF}
+  .admin-profile h1{font-family:Fraunces,serif;font-size:24px;margin:0;line-height:1.1}
+  .admin-profile p{margin:2px 0 0;font-size:13px;color:#777}
+  .admin-card{background:#fff;border:1px solid #EDEDEA;border-radius:14px;padding:22px;margin-bottom:18px}
+  .admin-card h3{margin:0 0 12px;font-size:17px}
+  .admin-card input,.admin-card select,.admin-card textarea{width:100%;padding:12px;border:1px solid #DDD;border-radius:10px;margin:7px 0;font-family:inherit;font-size:14px;background:#fff}
+  .admin-card textarea{min-height:130px;resize:vertical}
+  .admin-card label{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#777}
+  .post-row{display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid #F0F0ED;align-items:center}
+  .post-row:last-child{border-bottom:0}
+  .post-row b{font-size:15px}
+  .post-row small{color:#888}
+  .btn-danger{background:#DC2626;color:#fff;border:0;padding:8px 14px;border-radius:999px;cursor:pointer;font-size:13px;font-weight:600}
+  .btn-edit{background:#fff;border:1px solid #DDD;padding:8px 14px;border-radius:999px;cursor:pointer;font-size:13px;font-weight:600}
+  .btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+  .login-box{max-width:460px;margin:60px auto}
+  .login-profile{text-align:center;margin-bottom:18px}
+  .login-profile img{width:76px;height:76px;border-radius:50%;object-fit:cover;border:2px solid #EDEDEA}
+  .login-profile h2{font-family:Fraunces,serif;font-size:26px;margin:10px 0 4px}
+  .login-profile p{color:#777;font-size:14px;margin:0}
+  .hint{font-size:12px;color:#888;margin-top:8px}
+  @media(max-width:600px){.admin-profile h1{font-size:20px}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a href="index.html" class="logo"><span class="logo-mark">N</span> Ngetich K Peter</a>
+    <a href="index.html" class="btn-small">← Back to site</a>
   </div>
-  <div class="admin-card"><h3>Your Posts</h3><div id="postList">Loading...</div></div>
-  <div class="admin-card"><h3>Recent Comments</h3><div id="commentList">Loading...</div><p style="font-size:12px;color:#888">You can delete any comment you don't want.</p></div>
-</div>
+</header>
+
+<main class="admin-wrap">
+
+  <!-- LOGIN -->
+  <div id="loginBox" class="admin-card login-box">
+    <div class="login-profile">
+      <img src="https://github.com/NgetichKPeter.png" alt="Ngetich K Peter" onerror="this.style.display='none'">
+      <h2>Welcome back, Peter</h2>
+      <p>Admin — NgetichTech</p>
+    </div>
+    <label>Admin email</label>
+    <input id="email" type="email" placeholder="ngetichpeter97@gmail.com" autocomplete="email">
+    <label>Password</label>
+    <input id="password" type="password" placeholder="Your admin password" autocomplete="current-password">
+    <div class="btn-row"><button class="btn-primary" id="loginBtn" style="flex:1">Log in</button></div>
+    <p id="loginError" style="color:#DC2626;font-size:13px;margin:10px 0 0"></p>
+    <p class="hint">Only you can log in here. No sign-up form exists for visitors.</p>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div id="dash" style="display:none">
+    <div class="admin-top">
+      <div class="admin-profile">
+        <img class="admin-avatar" src="https://github.com/NgetichKPeter.png" alt="Ngetich K Peter">
+        <div>
+          <h1>Ngetich K Peter</h1>
+          <p>Developer &middot; Nairobi &middot; NgetichTech &middot; <span id="userEmail"></span></p>
+        </div>
+      </div>
+      <button class="btn-ghost" id="logoutBtn">Log out</button>
+    </div>
+
+    <div class="admin-card">
+      <h3 id="formTitle">New Post</h3>
+      <label>Title</label>
+      <input id="title" placeholder="e.g. How I built a booking tool">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div><label>Category</label><select id="category"><option>Code</option><option>Photography</option><option>Video</option><option>Writing</option></select></div>
+        <div><label>Type</label><select id="type"><option value="text">Text</option><option value="photo">Photo</option><option value="video">Video</option><option value="code">Code</option></select></div>
+      </div>
+      <label>Short description</label>
+      <input id="excerpt" placeholder="1-2 lines — shows on the card">
+      <label>Image URL or YouTube URL (optional)</label>
+      <input id="mediaUrl" placeholder="https://... image or YouTube link">
+      <label>Full content / story / code</label>
+      <textarea id="content" placeholder="Write your full post here..."></textarea>
+      <div class="btn-row">
+        <button class="btn-primary" id="saveBtn">Publish Post</button>
+        <button class="btn-ghost" id="clearBtn">Clear form</button>
+      </div>
+      <p class="hint">Tip: For photos, paste an image link. For video, paste a YouTube link. For code posts, choose Type = Code.</p>
+    </div>
+
+    <div class="admin-card">
+      <h3>Your Posts</h3>
+      <div id="postList">Loading...</div>
+    </div>
+
+    <div class="admin-card">
+      <h3>Recent Comments</h3>
+      <div id="commentList">Loading...</div>
+      <p class="hint">You can delete any comment you don't want. Visitors cannot delete.</p>
+    </div>
+  </div>
+
 </main>
-<script type="importmap">{"imports": {"firebase/app": "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js","firebase/firestore": "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js","firebase/auth": "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"}}</script>
+
+<script type="importmap">
+{"imports": {
+  "firebase/app": "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js",
+  "firebase/firestore": "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js",
+  "firebase/auth": "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"
+}}
+</script>
 <script type="module" src="admin.js"></script>
-</body></html>
+</body>
+</html>
