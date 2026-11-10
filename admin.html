@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Admin — NgetichTech</title><link rel="stylesheet" href="style.css">
+<style>.admin-wrap{max-width:860px;margin:0 auto;padding:32px 20px}.admin-card{background:#fff;border:1px solid #E8E5DF;border-radius:16px;padding:24px;margin-bottom:20px}.admin-card input,.admin-card select,.admin-card textarea{width:100%;padding:12px;border:1px solid #DDD;border-radius:10px;margin:8px 0;font-family:inherit}.admin-card textarea{min-height:120px}.post-row{display:flex;justify-content:space-between;gap:12px;padding:14px;border-bottom:1px solid #EEE;align-items:center}.btn-danger{background:#DC2626;color:#fff;border:0;padding:8px 14px;border-radius:999px;cursor:pointer}.btn-edit{background:#fff;border:1px solid #DDD;padding:8px 14px;border-radius:999px;cursor:pointer}</style>
+</head><body>
+<header class="topbar"><div class="wrap topbar-inner"><a href="index.html" class="logo"><span class="logo-mark">N</span> Ngetich<span>Tech</span></a><a href="index.html">← Back to site</a></div></header>
+<main class="admin-wrap">
+<div id="loginBox" class="admin-card"><h2 style="font-family:Fraunces,serif">Admin Login</h2><p style="color:#666">Only you can log in here.</p><input id="email" type="email" placeholder="Admin email"><input id="password" type="password" placeholder="Password"><button class="btn-primary" id="loginBtn">Log in</button><p id="loginError" style="color:red"></p></div>
+<div id="dash" style="display:none">
+  <div style="display:flex;justify-content:space-between;align-items:center"><h2 style="font-family:Fraunces,serif">Dashboard</h2><button class="btn-ghost" id="logoutBtn">Log out</button></div>
+  <div class="admin-card"><h3 id="formTitle">New Post</h3>
+    <input id="title" placeholder="Title — e.g. How I built a booking tool">
+    <select id="category"><option>Code</option><option>Photography</option><option>Video</option><option>Writing</option></select>
+    <select id="type"><option value="text">Text</option><option value="photo">Photo</option><option value="video">Video</option><option value="code">Code</option></select>
+    <input id="excerpt" placeholder="Short description (1-2 lines)">
+    <input id="mediaUrl" placeholder="Image URL or YouTube URL (optional)">
+    <textarea id="content" placeholder="Full content, story, or code..."></textarea>
+    <button class="btn-primary" id="saveBtn">Publish Post</button>
+    <button class="btn-ghost" id="clearBtn">Clear form</button>
+  </div>
+  <div class="admin-card"><h3>Your Posts</h3><div id="postList">Loading...</div></div>
+  <div class="admin-card"><h3>Recent Comments</h3><div id="commentList">Loading...</div><p style="font-size:12px;color:#888">You can delete any comment you don't want.</p></div>
+</div>
+</main>
+<script type="importmap">{"imports": {"firebase/app": "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js","firebase/firestore": "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js","firebase/auth": "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"}}</script>
+<script type="module" src="admin.js"></script>
+</body></html>
